@@ -14,8 +14,9 @@ class Button:
 
         p1 = Point(self.xmin, self.ymin)
         p2 = Point(self.xmax, self.ymax)
+        p3 = Point(self.xmax, self.ymax)
 
-        self.rect = Rectangle(p1, p2)
+        self.rect = Rectangle(p1, p2, p3)
         self.rect.setFill("lightgrey")
         self.rect.draw(win)
         self.label = Text(center, label)

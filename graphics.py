@@ -600,45 +600,49 @@ class _BBox(GraphicsObject):
     
 class Rectangle(_BBox):
     
-    def __init__(self, p1, p2):
-        _BBox.__init__(self, p1, p2)
+    def __init__(self, p1, p2, p3):
+        _BBox.__init__(self, p1, p2, p3)
 
     def __repr__(self):
-        return "Rectangle({}, {})".format(str(self.p1), str(self.p2))
+        return "Rectangle({}, {})".format(str(self.p1), str(self.p2), str(self.p3))
     
     def _draw(self, canvas, options):
         p1 = self.p1
         p2 = self.p2
+        p3 = self.p3
         x1,y1 = canvas.toScreen(p1.x,p1.y)
         x2,y2 = canvas.toScreen(p2.x,p2.y)
-        return canvas.create_rectangle(x1,y1,x2,y2,options)
+        x3, y3 = canvas.toScreen(p3.x, p3.y)
+        return canvas.create_rectangle(x1,y1,x2,y2,x3,y3,options)
         
     def clone(self):
-        other = Rectangle(self.p1, self.p2)
+        other = Rectangle(self.p1, self.p2, self.p3)
         other.config = self.config.copy()
         return other
 
 
 class Oval(_BBox):
     
-    def __init__(self, p1, p2):
-        _BBox.__init__(self, p1, p2)
+    def __init__(self, p1, p2, p3):
+        _BBox.__init__(self, p1, p2, p3)
 
     def __repr__(self):
-        return "Oval({}, {})".format(str(self.p1), str(self.p2))
+        return "Oval({}, {})".format(str(self.p1), str(self.p2), str(self.p3))
 
         
     def clone(self):
-        other = Oval(self.p1, self.p2)
+        other = Oval(self.p1, self.p2, self.p3)
         other.config = self.config.copy()
         return other
    
     def _draw(self, canvas, options):
         p1 = self.p1
         p2 = self.p2
+        p3 = self.p3
         x1,y1 = canvas.toScreen(p1.x,p1.y)
         x2,y2 = canvas.toScreen(p2.x,p2.y)
-        return canvas.create_oval(x1,y1,x2,y2,options)
+        x3,y3 = canvas.toScreen(p3.x, p3.y)
+        return canvas.create_oval(x1,y1,x2,y2,x3,y3,options)
     
 class Circle(Oval):
     
@@ -1007,6 +1011,7 @@ def test():
 
 #MacOS fix 2
 #tk.Toplevel(_root).destroy()
+
 
 # MacOS fix 1
 update()
